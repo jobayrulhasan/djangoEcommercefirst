@@ -6,5 +6,6 @@ from Shop import views
 
 urlpatterns = [
     path('', views.ProductView.as_view(), name="home"),
+    path('product/<int:pk>', views.ProductDetailsView.as_view(), name= 'show-product-details')
     
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

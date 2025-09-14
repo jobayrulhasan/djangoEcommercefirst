@@ -9,3 +9,9 @@ class ProductView(View):
         borkhas = Product.objects.filter(category = 'BK')
         babyfasion = Product.objects.filter(category = 'BF')
         return render(request, 'Shop/home.html', {'genspant': genspant, 'borkhas': borkhas, 'babyfasion': babyfasion}) 
+    
+
+class ProductDetailsView(View):
+    def get(self, request, pk):
+        productDetails = Product.objects.get(pk=pk)
+        return render(request, 'Shop/productdetail.html', {'productD': productDetails})
