@@ -50,7 +50,7 @@
     <!-- Slider 1 -->
     <div class="owl-carousel" id="slider1">
          {% for gens in  genspant %}
-        <a href="{url 'show-product-details' gens.id }" class="btn">
+        <a href="{%url 'show_product_details' gens.id %}" class="btn">
             <div class="item"><img src="{{gens.product_image.url}}" alt="" height="200px"><span
                 class="fw-bold">{{gens.title}}</span><br><span class="fs-5">Tk.{{gens.discounted_price}}</span>
             </div>
@@ -101,7 +101,7 @@
     <!-- Slider 2 -->
     <div class="owl-carousel" id="slider2">
            {% for bor in borkhas %}
-                <a href="{url 'show-product-details' bor.id }" class="btn">
+                <a href="{%url 'show_product_details' bor.id %}" class="btn">
                     <div class="item"><img src="{{bor.product_image.url}}" alt="" height="200px"><span
                     class="fw-bold">{{bor.title}}</span><br><span class="fs-5">Discount price, Tk. {{bor.discounted_price}}</span>
                     </div>
@@ -152,7 +152,7 @@
     <!-- Slider 3 -->
     <div class="owl-carousel" id="slider3">
         {% for baby in babyfasion %}
-        <a href="{url 'show-product-details' baby.id }" class="btn">
+        <a href="{%url 'show_product_details' baby.id %}" class="btn">
                 <div class="item"><img src="{{baby.product_image.url}}" alt="" height="200px"><span
                         class="fw-bold">{{baby.title}}</span><br><span class="fs-5">Tk.{{baby.discounted_price}}</span>
                 </div>

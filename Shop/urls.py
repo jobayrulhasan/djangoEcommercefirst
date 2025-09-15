@@ -6,6 +6,8 @@ from Shop import views
 
 urlpatterns = [
     path('', views.ProductView.as_view(), name="home"),
-    path('product/<int:pk>', views.ProductDetailsView.as_view(), name= 'show-product-details')
+    path('product/<int:pk>', views.ProductDetailsView.as_view(), name= 'show_product_details'),
+    path('lehenga/', views.lehenga, name= 'lehengasingle'),
+    path('lehenga/<slug:data>', views.lehenga, name= 'lehengaitems')
     
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
