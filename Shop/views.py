@@ -21,8 +21,8 @@ class ProductDetailsView(View):
 # show product by filter
 def lehenga(request, data = None):
     if data == None:
-        lehenga = Product.objects.filter(category = 'L')
-    elif data == 'Pakisthani' or 'Indian':
-        lehenga = Product.objects.filter(category = 'L').filter(brand=data)
-        return render(request, 'Shop/lehenga.html', {'lehengaD': lehenga})
+        lehengas = Product.objects.filter(category = 'L')
+    # elif data == 'Pakisthani' or data == 'Indian':
+    #     lehengas = Product.objects.filter(category = 'L').filter(brand=data)
+        return render(request, 'Shop/lehenga.html', {'lehengaD': lehengas})
     
