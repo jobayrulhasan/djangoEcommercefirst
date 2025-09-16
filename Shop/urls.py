@@ -7,7 +7,11 @@ from Shop import views
 urlpatterns = [
     path('', views.ProductView.as_view(), name="home"),
     path('product/<int:pk>', views.ProductDetailsView.as_view(), name= 'show_product_details'),
+    # lehenga
     path('lehenga/', views.lehenga, name= 'lehengasingle'),
-    path('lehenga/<slug:data>', views.lehenga, name= 'lehengaitems')
+    path('lehenga/<slug:data>', views.lehenga, name= 'lehengaitems'),
+    #sharee
+    path('sharee/', views.sharee, name= 'shareesingle'),
+    path('sharee/<slug:data>', views.sharee, name= 'shareeitems')
     
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
