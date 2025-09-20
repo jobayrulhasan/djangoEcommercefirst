@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Product
 from django.views import View
+from .forms import CustomerRegistrationForm
 
 # Create your views here.
 # show product by different catagory
@@ -58,3 +59,21 @@ def sharee(request, data=None):
         'shareeD': sharees,
         'message': message
     })
+
+
+# def registration(request):
+#     return render(request, 'Shop/customerregistration.html')
+
+# class view for user registration
+class CustomerRegistrationView(View):
+    def get(self, request):
+        form = CustomerRegistrationForm()
+        return render(request, 'Shop/customerregistration.html', {'form': form})
+    
+    def post(self, request):
+        form = CustomerRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'Shop/customerregistration.html', {'form': form})
+        
+        

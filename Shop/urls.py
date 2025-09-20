@@ -12,6 +12,8 @@ urlpatterns = [
     path('lehenga/<slug:data>', views.lehenga, name= 'lehengaitems'),
     #sharee
     path('sharee/', views.sharee, name= 'shareesingle'),
-    path('sharee/<slug:data>', views.sharee, name= 'shareeitems')
+    path('sharee/<slug:data>', views.sharee, name= 'shareeitems'),
+    # customer registration
+    path('registration/', views.CustomerRegistrationView.as_view(), name='userregistration')
     
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
