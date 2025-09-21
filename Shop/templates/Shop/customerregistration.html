@@ -9,7 +9,15 @@
             <hr>
 
             <form action="" method="post" novalidate class="shadow p-5">
+                {% if messages %}
+                {% for message in messages %}
+                <p class="alert alert-success mb-3">{{ message }}</p>
+                {% endfor %}
+                {% endif %} 
+
+
                 {% csrf_token %}
+
                 {% for fm in form %}
                  <div class="form-group mb-3">
                     {{fm.label_tag}} {{fm}} <small>{{fm.errors | striptags}}</small>
@@ -20,7 +28,7 @@
                     <input type="submit" class="btn btn-primary" value="Submit">
                 </div>
                 <br>
-                <div class="text-center text-primary fw-bold"><small>Existing User ? <a href="#"
+                <div class="text-center text-primary fw-bold"><small>Existing User ? <a href="{% url 'loginpage'%}"
                             class="text-danger">Login Now</a> </small></div>
                 {% if form.non_field_errors %}
                 {% for error in form.non_field_errors %}

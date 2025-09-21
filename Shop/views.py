@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect
 from .models import Product
 from django.views import View
 from .forms import CustomerRegistrationForm
+from django.contrib import messages
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate, login
 
 # Create your views here.
 # show product by different catagory
@@ -61,9 +64,6 @@ def sharee(request, data=None):
     })
 
 
-# def registration(request):
-#     return render(request, 'Shop/customerregistration.html')
-
 # class view for user registration
 class CustomerRegistrationView(View):
     def get(self, request):
@@ -74,6 +74,21 @@ class CustomerRegistrationView(View):
         form = CustomerRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Congratulations! registration successfull')
             return render(request, 'Shop/customerregistration.html', {'form': form})
-        
-        
+
+
+# user login
+def user_login(request):
+    if request.method == 'POST':
+        frm = AuthenticationForm(request=request, data=request.POST)
+        if frm.is_valid():
+            uName = frm.cleaned_data.get('username')
+            uPassword = frm.cleaned_data.get('password')
+            user = authenticate(username=uName, password=uPassword)
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect('/')
+    else:
+      frm = AuthenticationForm()
+    return render(request, 'Shop/login.html', {'form': frm})

@@ -14,6 +14,8 @@ urlpatterns = [
     path('sharee/', views.sharee, name= 'shareesingle'),
     path('sharee/<slug:data>', views.sharee, name= 'shareeitems'),
     # customer registration
-    path('registration/', views.CustomerRegistrationView.as_view(), name='userregistration')
+    path('registration/', views.CustomerRegistrationView.as_view(), name='userregistration'),
+    # login
+    path('login/', views.user_login, name='loginpage')
     
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
