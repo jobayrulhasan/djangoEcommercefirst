@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, redirect
 from .models import Product
 from django.views import View
 from .forms import CustomerRegistrationForm
@@ -88,7 +88,11 @@ def user_login(request):
             user = authenticate(username=uName, password=uPassword)
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect('/')
+                return redirect('profilepage') # profile is the name of url's name
     else:
       frm = AuthenticationForm()
     return render(request, 'Shop/login.html', {'form': frm})
+
+# profile
+def profile_view(request):
+    return render(request, 'Shop/profile.html')

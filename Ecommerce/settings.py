@@ -122,6 +122,9 @@ MEDIA_URL = '/media/'
 # Path where media is stored'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# redirect to profile page after login
+# LOGIN_REDIRECT_URL= '/profilepage/'
+
 
 
 # Default primary key field type

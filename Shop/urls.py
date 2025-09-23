@@ -16,6 +16,8 @@ urlpatterns = [
     # customer registration
     path('registration/', views.CustomerRegistrationView.as_view(), name='userregistration'),
     # login
-    path('login/', views.user_login, name='loginpage')
+    path('accounts/login/', views.user_login, name='loginpage'),
+    # profile
+    path('profile/', views.profile_view, name='profilepage')
     
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
