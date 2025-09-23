@@ -4,7 +4,7 @@ from django.views import View
 from .forms import CustomerRegistrationForm
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 # show product by different catagory
@@ -92,6 +92,12 @@ def user_login(request):
     else:
       frm = AuthenticationForm()
     return render(request, 'Shop/login.html', {'form': frm})
+
+# user logout
+def user_logout(request):
+    logout(request)
+    return redirect('/')
+
 
 # profile
 def profile_view(request):
