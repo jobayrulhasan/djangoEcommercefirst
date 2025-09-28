@@ -9,6 +9,8 @@ from .forms import MyPasswordChangeForm, MyPasswordResetForm, MySetPasswordForm
 urlpatterns = [
     path('', views.ProductView.as_view(), name="home"),
     path('product/<int:pk>', views.ProductDetailsView.as_view(), name= 'show_product_details'),
+    #Add to cart
+    path('addcart/', views.add_to_cart, name='addtocart'),
     # lehenga
     path('lehenga/', views.lehenga, name= 'lehengasingle'),
     path('lehenga/<slug:data>', views.lehenga, name= 'lehengaitems'),
@@ -34,6 +36,8 @@ urlpatterns = [
     path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view(template_name='Shop/password_reset_complete.html'), name='password_reset_complete'),
 
     # profile
-    path('profile/', views.profile_view, name='profilepage')
+    path('profile/', views.ProfileView.as_view(), name='profilepage'),
+    # Address
+     path('address/', views.address, name='address'),
     
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

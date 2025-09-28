@@ -10,10 +10,14 @@
         <div class="col-sm-5 offset-sm-1">
             <h2>Product Title: {{productD.title}}</h2>
             <hr>
-            <p> <strong>Product Description:</strong> {{productD.description}}</p> <br>
+            <p>Product Description: {{productD.description}}</p> <br>
             <h4>Tk. {{productD.discounted_price}} <small class="fw-light text-decoration-line-through">{{productD.selling_price}}</small></h4> <br>
-            {% comment %} <a href="{% url 'add-to-cart' %}" class="btn btn-primary shadow px-5 py-2">Add to Cart</a>
-            <a href="{% url 'buy-now' %}" class="btn btn-danger shadow px-5 py-2 ms-4">Buy Now</a> {% endcomment %}
+            
+            <form action="/addcart" class="d-inline">
+                <input type="hidden" name="product_id" value="{{productD.id}}" id="product_id">
+                <button type="Submit" class="btn btn-primary shadow px-5 py-2">Add to Cart</button>
+            </form>
+            <a href="" class="btn btn-danger shadow px-5 py-2 ms-4">Buy Now</a>
             <h5 class="mt-5">Available Offers</h5>
             <ul>
                 <li>Bkash Offer 5% Unlimited Cashback on Payment</li>

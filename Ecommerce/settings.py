@@ -122,8 +122,16 @@ MEDIA_URL = '/media/'
 # Path where media is stored'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# send mail to user for reset password
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# send mail to user for reset password in console
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# send reset password link to email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = ('jobayerdpi11@gmail.com')
+EMAIL_HOST_PASSWORD = ('folr dhvc zytf ugry')
 
 # redirect to profile page after login
 # LOGIN_REDIRECT_URL= '/profilepage/'

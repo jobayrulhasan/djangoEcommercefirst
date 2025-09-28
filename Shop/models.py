@@ -20,7 +20,7 @@ class Customer(models.Model):
     division = models.CharField(choices=DIVISION_CHOICES, max_length= 50)
     district = models.CharField(max_length=200)
     thana = models.CharField(max_length=50)
-    villageorroad = models.CharField(50)
+    villageorroad = models.CharField(max_length=50)
     zipcode = models.IntegerField()
     
     

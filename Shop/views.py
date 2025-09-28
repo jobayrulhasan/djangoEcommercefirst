@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
-from .models import Product
+from .models import Product, Customer, Cart
 from django.views import View
-from .forms import CustomerRegistrationForm
+from .forms import CustomerRegistrationForm, CustomerProfileForm
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 
-# Create your views here.
+
 # show product by different catagory
 class ProductView(View):
     def get(self, request):
@@ -100,5 +100,36 @@ def user_logout(request):
 
 
 # profile
-def profile_view(request):
-    return render(request, 'Shop/profile.html')
+class ProfileView(View):
+    def get(self, request):
+        form = CustomerProfileForm()
+        return render(request, 'Shop/profile.html', {'form': form, 'active':'btn-primary'})
+    
+    def post(self, request):
+        form = CustomerProfileForm(request.POST)
+        if form.is_valid():
+            user_name = request.user
+            customer_name = form.cleaned_data['name']
+            customer_division = form.cleaned_data['division']
+            customer_district = form.cleaned_data['district']
+            customer_thana = form.cleaned_data['thana']
+            customer_villageorroad = form.cleaned_data['villageorroad']
+            customer_zipcode = form.cleaned_data['zipcode']
+            all_customer_data = Customer(user = user_name, name = customer_name, division = customer_division, district = customer_district, thana = customer_thana, villageorroad = customer_villageorroad, zipcode = customer_zipcode)
+            all_customer_data.save()
+            messages.success(request, 'Congratulations! Profile Updated Successfully')
+        return render(request, 'Shop/profile.html', {'form':form, 'active':'btn-primary'})
+    
+# Address
+def address(request):
+ add = Customer.objects.filter(user=request.user)
+ return render(request, 'Shop/address.html', {'add':add, 'active':'btn-primary'})
+
+# Add to card
+
+def add_to_cart(request):
+    userName = request.user
+    product_Id = request.GET.get('product_id')
+    productTable = Product.objects.get(id = product_Id)
+    Cart(user=userName, product = productTable).save()
+    return render(request,'Shop/addtocart.html')
