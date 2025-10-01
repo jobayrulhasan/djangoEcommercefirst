@@ -126,10 +126,27 @@ def address(request):
  return render(request, 'Shop/address.html', {'add':add, 'active':'btn-primary'})
 
 # Add to card
-
 def add_to_cart(request):
     userName = request.user
     product_Id = request.GET.get('product_id')
     productTable = Product.objects.get(id = product_Id)
     Cart(user=userName, product = productTable).save()
-    return render(request,'Shop/addtocart.html')
+    return redirect('/cart')
+
+# show in cart
+def show_cart(request):
+   if request.user.is_authenticated:
+       username = request.user
+       cart = Cart.objects.filter(user=username)
+       amount = 0
+       shipping_amount = 100
+       cart_product = [p for p in Cart.objects.all() if p.user == username]
+       if cart_product:
+        for p in cart_product:
+            temp_amount = p.quantity * p.product.discounted_price
+            amount += temp_amount
+            total_amount = amount + shipping_amount
+            
+        else:
+          return render(request, 'Shop/emptycart.html')
+       return render(request, 'Shop/addtocart.html', {'carts': cart, 'totalamount': total_amount, 'amount': amount})
