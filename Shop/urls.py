@@ -13,6 +13,12 @@ urlpatterns = [
     path('addcart/', views.add_to_cart, name='addtocart'),
     # show cart
     path('cart/', views.show_cart, name = 'showCart'),
+    # cart value plus
+    path('pluscart/', views.plus_cart),
+    # cart value minus
+    path('minuscart/', views.minus_cart),
+    # remove cart value
+    path('removecart/', views.remove_cart),
     # lehenga
     path('lehenga/', views.lehenga, name= 'lehengasingle'),
     path('lehenga/<slug:data>', views.lehenga, name= 'lehengaitems'),
@@ -40,6 +46,11 @@ urlpatterns = [
     # profile
     path('profile/', views.ProfileView.as_view(), name='profilepage'),
     # Address
-     path('address/', views.address, name='address'),
-    
+    path('address/', views.address, name='address'),
+    # checkout
+    path('checkout/', views.checkout, name= 'checkout'),
+    # payment done
+    path('paymentdone/', views.payment_done, name = 'payment_done'),
+    # Order
+    path('orders/', views.orders, name = 'orders')
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

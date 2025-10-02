@@ -24,9 +24,9 @@ $("#slider1, #slider2, #slider3").owlCarousel({
 
 //cart plus
 $(".plus-cart").click(function () {
-  var id = $(this).attr("pid").toString();
+  var id = $(this).attr("productid").toString();
   var eml = this.parentNode.children[2];
-  // console.log(id);
+  //console.log(id);
   $.ajax({
     type: "GET",
     url: "/pluscart",
@@ -37,13 +37,14 @@ $(".plus-cart").click(function () {
       eml.innerText = data.quantity;
       document.getElementById("amount").innerText = data.amount;
       document.getElementById("totalamount").innerText = data.totalamount;
+      document.getElementById("shipping_amount").innerText = data.shippingAmount;
     },
   });
 });
 
 //cart minus
 $(".minus-cart").click(function () {
-  var id = $(this).attr("pid").toString();
+  var id = $(this).attr("productid").toString();
   var eml = this.parentNode.children[2];
   // console.log(id);
   $.ajax({
@@ -56,13 +57,14 @@ $(".minus-cart").click(function () {
       eml.innerText = data.quantity;
       document.getElementById("amount").innerText = data.amount;
       document.getElementById("totalamount").innerText = data.totalamount;
+      document.getElementById("shipping_amount").innerText = data.shippingAmount;
     },
   });
 });
 
 //Remove cart product
-$(".remove-cart").click(function () {
-  var id = $(this).attr("pid").toString();
+$(".remove_cart").click(function () {
+  var id = $(this).attr("productid").toString();
   var eml = this;
   // console.log(id);
   $.ajax({
