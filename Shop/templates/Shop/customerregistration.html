@@ -11,7 +11,7 @@
             <form action="" method="post" novalidate class="shadow p-5">
                 {% if messages %}
                 {% for message in messages %}
-                <p class="alert alert-success mb-3">{{ message }}</p>
+                <p class="alert alert-danger mb-3">{{ message }}</p>
                 {% endfor %}
                 {% endif %} 
 
@@ -20,11 +20,10 @@
 
                 {% for fm in form %}
                  <div class="form-group mb-3">
-                    {{fm.label_tag}} {{fm}} <small>{{fm.errors | striptags}}</small>
+                    {{fm.label_tag}} {{fm}} <small class="text-danger">{{fm.errors | striptags}}</small>
                  </div>
                 {% endfor %}
                 <div>
-                    {% comment %} <button type="button" class="btn btn-danger">Submit</button> {% endcomment %}
                     <input type="submit" class="btn btn-primary" value="Submit">
                 </div>
                 <br>

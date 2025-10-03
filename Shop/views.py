@@ -8,6 +8,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
 from django.http import JsonResponse
 from django.core.mail import send_mail # send an email
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 
 # show product by different catagory
@@ -19,6 +21,7 @@ class ProductView(View):
         return render(request, 'Shop/home.html', {'genspant': genspant, 'borkhas': borkhas, 'babyfasion': babyfasion}) 
     
 # show product by primary key
+@method_decorator(login_required, name='dispatch')
 class ProductDetailsView(View):
     def get(self, request, pk):
         productDetails = Product.objects.get(pk=pk)
@@ -72,13 +75,17 @@ class CustomerRegistrationView(View):
     def get(self, request):
         form = CustomerRegistrationForm()
         return render(request, 'Shop/customerregistration.html', {'form': form})
-    
+
     def post(self, request):
         form = CustomerRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Congratulations! registration successfull')
             return render(request, 'Shop/customerregistration.html', {'form': form})
+        else:
+            messages.error(request, 'Invalid input. Please correct the errors below.')
+            return render(request, 'Shop/customerregistration.html', {'form': form})
+        
 
 
 # user login
@@ -103,6 +110,7 @@ def user_logout(request):
 
 
 # profile
+@method_decorator(login_required, name='dispatch')
 class ProfileView(View):
     def get(self, request):
         form = CustomerProfileForm()
@@ -124,6 +132,7 @@ class ProfileView(View):
         return render(request, 'Shop/profile.html', {'form':form, 'active':'btn-primary'})
     
 # Address
+@login_required
 def address(request):
  add = Customer.objects.filter(user=request.user)
  return render(request, 'Shop/address.html', {'add':add, 'active':'btn-primary'})
@@ -250,6 +259,7 @@ def remove_cart(request):
 
 
 # checkout
+@login_required
 def checkout(request):
     request_user = request.user
     add = Customer.objects.filter(user = request_user)
@@ -278,6 +288,7 @@ def payment_done(request):
     return redirect('/orders')
 
 # order
+@login_required
 def orders(request):
  op = OrderPlaced.objects.filter(user=request.user)
  return render(request, 'Shop/orders.html', {'order_placed':op})
