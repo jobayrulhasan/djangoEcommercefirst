@@ -52,5 +52,7 @@ urlpatterns = [
     # payment done
     path('paymentdone/', views.payment_done, name = 'payment_done'),
     # Order
-    path('orders/', views.orders, name = 'orders')
+    path('orders/', views.orders, name = 'orders'),
+    # Contact
+    path("contact/", views.contact, name="contact"),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

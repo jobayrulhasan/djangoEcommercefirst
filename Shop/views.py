@@ -7,6 +7,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
 from django.http import JsonResponse
+from django.core.mail import send_mail # send an email
 
 
 # show product by different catagory
@@ -280,3 +281,26 @@ def payment_done(request):
 def orders(request):
  op = OrderPlaced.objects.filter(user=request.user)
  return render(request, 'Shop/orders.html', {'order_placed':op})
+
+# contact
+def contact(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        message = request.POST.get("message")
+
+        subject = f"New Contact Form Submission from {name}"
+        full_message = f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}"
+
+        try:
+            send_mail(
+                subject,
+                full_message,
+                email,  # sender (from the form)
+                ["jobayerdpi11@gmail.com"],  # recipient (your email)
+            )
+            messages.success(request, "Your message has been sent successfully! Thank you very much to send me the message 🤝")
+        except Exception as e:
+            messages.error(request, f"Error sending message: {e}")
+        return redirect("contact")  # reload page with success/error message
+    return render(request, "Shop/contact.html")
